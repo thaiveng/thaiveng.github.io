@@ -5,12 +5,14 @@ import Preloader from './components/Preloader.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
+import Skills from './components/Skills.jsx';
+import Projects from './components/Projects.jsx';
 import MusicSection from './components/MusicSection.jsx';
-import Portfolio from './components/Portfolio.jsx';
+import Experience from './components/Experience.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 
-/** Hairline progress bar pinned above the nav. */
+/** Hairline of vermilion ink across the top, tracking reading progress. */
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
@@ -18,7 +20,7 @@ function ScrollProgress() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[130] h-[2px] origin-left bg-gradient-to-r from-cyber via-violet to-amber"
+      className="fixed inset-x-0 top-0 z-[130] h-[2px] origin-left bg-shu/80"
       aria-hidden="true"
     />
   );
@@ -26,20 +28,22 @@ function ScrollProgress() {
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-
   const finishLoading = useCallback(() => setLoading(false), []);
 
-  // hold the page still while the loader is up, and start at the top on reload
+  // hold the page still while the loader is up
   useEffect(() => {
-    if (loading) {
-      document.body.style.overflow = 'hidden';
-      window.scrollTo(0, 0);
-    } else {
-      document.body.style.overflow = '';
-    }
+    if (!loading) return;
+    document.body.style.overflow = 'hidden';
+    if (!window.location.hash) window.scrollTo(0, 0);
     return () => {
       document.body.style.overflow = '';
     };
+  }, [loading]);
+
+  // honour a deep link like /#projects once the page is visible
+  useEffect(() => {
+    if (loading || !window.location.hash) return;
+    document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
   }, [loading]);
 
   return (
@@ -47,8 +51,8 @@ export default function App() {
       <AnimatePresence>{loading && <Preloader onDone={finishLoading} />}</AnimatePresence>
 
       <a
-        href="#home"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[140] focus:bg-cyber focus:px-4 focus:py-2 focus:font-mono focus:text-[0.75rem] focus:text-ink"
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[140] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-[0.85rem] focus:text-paper"
       >
         Skip to content
       </a>
@@ -57,35 +61,22 @@ export default function App() {
       <Navbar />
 
       <motion.main
+        id="main"
         initial={{ opacity: 0 }}
         animate={{ opacity: loading ? 0 : 1 }}
-        transition={{ duration: 0.8, delay: loading ? 0 : 0.15 }}
+        transition={{ duration: 0.7, delay: loading ? 0 : 0.05 }}
         className="relative"
       >
         <Hero />
-
-        <Divider />
         <About />
-
-        <Divider />
+        <Skills />
+        <Projects />
         <MusicSection />
-
-        <Divider />
-        <Portfolio />
-
-        <Divider />
+        <Experience />
         <Contact />
       </motion.main>
 
       <Footer />
     </>
-  );
-}
-
-function Divider() {
-  return (
-    <div className="relative z-10 mx-auto max-w-[1120px] px-6 md:px-10" aria-hidden="true">
-      <div className="h-px bg-gradient-to-r from-transparent via-hairline to-transparent" />
-    </div>
   );
 }

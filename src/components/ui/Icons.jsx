@@ -2,7 +2,7 @@
 const base = {
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 1.6,
+  strokeWidth: 1.5,
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
 };
@@ -33,6 +33,24 @@ export function InstagramIcon({ className = 'size-[18px]' }) {
   );
 }
 
+export function TelegramIcon({ className = 'size-[18px]' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <path d="M21 4 3 11.2l6.2 2.1L18 7.5l-6.8 7.1 6.3 5.4L21 4Z" />
+      <path d="m9.2 13.3.6 5.7 2.4-3.4" />
+    </svg>
+  );
+}
+
+export function MailIcon({ className = 'size-[18px]' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
 export function ArrowUpIcon({ className = 'size-4' }) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
@@ -49,6 +67,14 @@ export function ArrowRightIcon({ className = 'size-4' }) {
   );
 }
 
+export function ArrowUpRightIcon({ className = 'size-4' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <path d="M7 17 17 7M8 7h9v9" />
+    </svg>
+  );
+}
+
 export function CloseIcon({ className = 'size-5' }) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
@@ -60,7 +86,7 @@ export function CloseIcon({ className = 'size-5' }) {
 export function MenuIcon({ className = 'size-5' }) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
-      <path d="M4 7h16M4 12h16M4 17h16" />
+      <path d="M4 8h16M4 16h11" />
     </svg>
   );
 }
@@ -91,8 +117,63 @@ export function SpotifyIcon({ className = 'size-5' }) {
   );
 }
 
+/* ---------------------------- skill category ----------------------------- */
+export function PhoneIcon({ className = 'size-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+      <path d="M10.5 18.5h3" />
+    </svg>
+  );
+}
+
+export function WindowIcon({ className = 'size-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="2.5" />
+      <path d="M3 9h18M6.5 6.5h.01M9 6.5h.01" />
+      <path d="m10 13-2 2 2 2M14 13l2 2-2 2" />
+    </svg>
+  );
+}
+
+export function ServerIcon({ className = 'size-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="7" rx="2" />
+      <rect x="3.5" y="13.5" width="17" height="7" rx="2" />
+      <path d="M7.5 7h.01M7.5 17h.01M11 7h5M11 17h5" />
+    </svg>
+  );
+}
+
+export function DatabaseIcon({ className = 'size-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <ellipse cx="12" cy="5.5" rx="7.5" ry="2.8" />
+      <path d="M4.5 5.5v13c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-13" />
+      <path d="M4.5 12c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8" />
+    </svg>
+  );
+}
+
+export function ToolsIcon({ className = 'size-5' }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...base} aria-hidden="true">
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.5 17.2a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.5 2.5-2.2-.4-.4-2.2 2.9-2.1Z" />
+    </svg>
+  );
+}
+
 export const iconMap = {
   github: GitHubIcon,
   linkedin: LinkedInIcon,
   instagram: InstagramIcon,
+  telegram: TelegramIcon,
+  mail: MailIcon,
+  phone: PhoneIcon,
+  window: WindowIcon,
+  server: ServerIcon,
+  database: DatabaseIcon,
+  tools: ToolsIcon,
 };

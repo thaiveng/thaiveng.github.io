@@ -9,15 +9,11 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
-        // Split the heavy 3D/animation libraries out of the entry chunk so the
-        // hero text paints before three.js finishes downloading.
+        // Keep the animation library in its own long-cached chunk.
         manualChunks(id) {
           if (!id.includes('node_modules')) return undefined;
-          if (id.includes('@react-three')) return 'r3f';
-          if (id.includes('/three/') || id.includes('three-stdlib')) return 'three';
           if (id.includes('framer-motion') || id.includes('motion-dom') || id.includes('motion-utils'))
             return 'motion';
           return undefined;

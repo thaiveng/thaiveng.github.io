@@ -2,15 +2,15 @@ import { motionTag } from './motionTag.js';
 
 const variants = {
   primary:
-    'clip-notch bg-cyber text-ink font-semibold hover:bg-white shadow-[0_10px_40px_-14px_rgba(0,229,255,0.65)]',
+    'bg-ink text-paper border border-ink hover:bg-[#3b3832] shadow-[0_10px_24px_-14px_rgba(42,40,36,0.7)]',
   secondary:
-    'border border-hairline bg-white/[0.02] text-chalk hover:border-cyber/60 hover:text-cyber',
-  ghost: 'text-ash hover:text-cyber',
+    'border border-line-strong bg-card/70 text-ink hover:border-ink hover:bg-card',
+  ghost: 'text-ink-soft hover:text-ink',
 };
 
 const sizes = {
-  md: 'px-7 py-3 text-[0.85rem]',
-  sm: 'px-4 py-2 text-[0.78rem]',
+  md: 'px-6 py-3 text-[0.9rem]',
+  sm: 'px-4 py-2 text-[0.82rem]',
 };
 
 /**
@@ -33,8 +33,8 @@ export function Button({
       href={href}
       whileHover={{ y: -2 }}
       whileTap={{ y: 0, scale: 0.985 }}
-      transition={{ type: 'spring', stiffness: 420, damping: 26 }}
-      className={`inline-flex items-center justify-center gap-2 font-display tracking-[0.03em] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`}
+      transition={{ type: 'spring', stiffness: 420, damping: 28 }}
+      className={`inline-flex items-center justify-center gap-2 rounded-full font-medium tracking-[0.01em] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >
       {children}

@@ -1,63 +1,83 @@
 @import 'tailwindcss';
 
 /* ==========================================================================
-   DESIGN TOKENS  (Tailwind v4 theme — these become real utilities:
-   bg-ink, text-cyber, font-display, animate-float, shadow-glow, …)
+   DESIGN TOKENS — "paper & sumi ink"
+   Tailwind v4 turns these into utilities: bg-paper, text-ink, border-line,
+   text-sage, bg-shu, font-serif, shadow-paper, …
    ========================================================================== */
 @theme {
-  /* surfaces */
-  --color-ink: #05070d;
-  --color-ink-50: #090c14;
-  --color-ink-100: #0e1220;
-  --color-ink-200: #141826;
-  --color-hairline: #1e2840;
+  /* paper surfaces */
+  --color-paper: #f4efe4;     /* page */
+  --color-paper-deep: #ebe3d3; /* banded sections */
+  --color-card: #fbf8f1;      /* cards, sheets */
+  --color-line: #ddd3c1;      /* hairlines */
+  --color-line-strong: #c9bca5;
+
+  /* ink */
+  --color-ink: #2a2824;        /* sumi */
+  --color-ink-soft: #55514a;   /* body copy — 7:1 on paper */
+  --color-ink-muted: #625c51;  /* meta text — ≥5:1 on every paper tone */
+  --color-ink-faint: #a39b8c;  /* decoration only */
 
   /* accents */
-  --color-cyber: #00e5ff;
-  --color-amber: #ffb347;
-  --color-violet: #a78bfa;
-
-  /* text */
-  --color-chalk: #e2e8f0;
-  --color-ash: #8292ab;
-  --color-slate-muted: #5a6880;
+  --color-sage: #56674b;
+  --color-sage-soft: #dfe4d4;
+  --color-mist: #516679;       /* dusty blue */
+  --color-mist-soft: #dbe3e8;
+  --color-shu: #a04a35;        /* vermilion seal ink */
+  --color-shu-soft: #f1dcd3;
+  --color-sakura: #ecd3cd;
+  --color-kincha: #c39a5b;     /* muted gold */
 
   /* type */
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Zen Kaku Gothic New', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* motion */
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-blink: blink 1.05s step-end infinite;
-  --animate-pulse-ring: pulseRing 2.2s ease-out infinite;
-  --animate-shimmer: shimmer 2.6s linear infinite;
-  --animate-scroll-pulse: scrollPulse 2s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-ring: pulseRing 2.4s ease-out infinite;
+  --animate-steam: steam 3.6s ease-in-out infinite;
+  --animate-petal: petal 14s linear infinite;
+  --animate-scroll-pulse: scrollPulse 2.2s ease-in-out infinite;
+  --animate-swing: swing 4.8s ease-in-out infinite;
+  --animate-blink: blink 1.1s step-end infinite;
 
-  /* elevation */
-  --shadow-glow: 0 0 0 1px rgb(0 229 255 / 0.25), 0 18px 60px -18px rgb(0 229 255 / 0.35);
-  --shadow-card: 0 24px 60px -28px rgb(0 0 0 / 0.9);
+  /* elevation — warm, low, paper-like */
+  --shadow-paper: 0 1px 0 rgb(42 40 36 / 0.04), 0 10px 30px -18px rgb(70 55 35 / 0.28);
+  --shadow-lift: 0 1px 0 rgb(42 40 36 / 0.04), 0 26px 50px -26px rgb(70 55 35 / 0.38);
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-12px); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@keyframes steam {
+  0%   { transform: translateY(4px); opacity: 0; }
+  35%  { opacity: 0.7; }
+  100% { transform: translateY(-14px); opacity: 0; }
+}
+@keyframes petal {
+  0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.8; }
+  100% { transform: translate3d(-18vw, 105vh, 0) rotate(540deg); opacity: 0; }
+}
+@keyframes swing {
+  0%, 100% { transform: rotate(-5deg); }
+  50%      { transform: rotate(5deg); }
 }
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0; }
 }
-@keyframes pulseRing {
-  0%   { transform: scale(0.85); opacity: 0.85; }
-  100% { transform: scale(2.4);  opacity: 0; }
-}
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.25; transform: scaleY(1); }
-  50%      { opacity: 1;    transform: scaleY(1.15); }
+  0%, 100% { opacity: 0.3; transform: scaleY(0.85); }
+  50%      { opacity: 1;   transform: scaleY(1); }
 }
 
 /* ==========================================================================
@@ -67,109 +87,126 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    background-color: var(--color-paper);
   }
 
   body {
     margin: 0;
-    background-color: var(--color-ink);
-    color: var(--color-chalk);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  /* film-grain overlay, kept behind every interactive layer */
+  /* paper grain — fixed, behind everything interactive */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.32;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.18 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.028em;
-    line-height: 1.07;
-  }
-
-  ::selection {
-    background: var(--color-cyber);
+    font-family: var(--font-serif);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
     color: var(--color-ink);
   }
 
-  /* scrollbar */
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-ink); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-hairline);
-    border-radius: 999px;
-    border: 2px solid var(--color-ink);
+  ::selection {
+    background: var(--color-shu-soft);
+    color: var(--color-ink);
   }
-  ::-webkit-scrollbar-thumb:hover { background: #2c3a5c; }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-paper); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border-radius: 999px;
+    border: 3px solid var(--color-paper);
+  }
 
   :focus-visible {
-    outline: 2px solid var(--color-cyber);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 2px solid var(--color-mist);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 
   input, textarea, button { font-family: inherit; }
-
-  canvas { touch-action: pan-y; }
 }
 
 /* ==========================================================================
-   COMPONENT-LEVEL HELPERS
+   HELPERS
    ========================================================================== */
-@utility glass {
-  background-color: color-mix(in oklab, var(--color-ink) 94%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border-color: color-mix(in oklab, var(--color-hairline) 90%, transparent);
-}
 
-@utility clip-notch {
-  clip-path: polygon(
-    0 0,
-    calc(100% - 12px) 0,
-    100% 12px,
-    100% 100%,
-    12px 100%,
-    0 calc(100% - 12px)
-  );
-}
-
-@utility text-glow {
-  text-shadow: 0 0 18px color-mix(in oklab, var(--color-cyber) 55%, transparent),
-    0 0 46px color-mix(in oklab, var(--color-cyber) 28%, transparent);
-}
-
+/* small uppercase label — the "stationery print" voice */
 @utility eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-@utility gradient-text {
-  background-image: linear-gradient(
-    96deg,
-    var(--color-chalk) 0%,
-    var(--color-cyber) 48%,
-    var(--color-violet) 100%
+/* graph-paper dots, used in the hero spread */
+@utility paper-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    color-mix(in oklab, var(--color-ink) 14%, transparent) 1px,
+    transparent 0
   );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  background-size: 22px 22px;
 }
 
-/* respect reduced-motion: kill the decorative loops, keep content visible */
+/* ruled notebook lines, used on the letter in Contact */
+@utility paper-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 35px,
+    color-mix(in oklab, var(--color-mist) 13%, transparent) 35px,
+    color-mix(in oklab, var(--color-mist) 13%, transparent) 36px
+  );
+}
+
+/* translucent strip of masking tape */
+@utility washi {
+  position: absolute;
+  height: 26px;
+  width: 104px;
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 6px,
+    rgb(255 255 255 / 0.35) 6px 12px
+  );
+  clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 4% 96%, 0 50%);
+}
+
+/* highlighter stroke, like marking a line in a notebook */
+@utility marker {
+  background-image: linear-gradient(
+    transparent 58%,
+    color-mix(in oklab, var(--color-sage) 26%, transparent) 58%,
+    color-mix(in oklab, var(--color-sage) 26%, transparent) 92%,
+    transparent 92%
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: 0.15em;
+}
+
+
+/* respect reduced-motion: stop decorative loops, keep content visible */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

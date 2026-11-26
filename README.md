@@ -1,6 +1,6 @@
 # thaiveng.github.io
 
-Interactive developer portfolio — **Vite + React 19, Tailwind CSS v4, Framer Motion, React Three Fiber**.
+Personal developer portfolio styled like a quiet Japanese journal — **Vite + React 19, Tailwind CSS v4, Framer Motion**.
 
 Live at <https://thaiveng.github.io>
 
@@ -39,27 +39,28 @@ Almost everything you'll want to change lives in **one file**:
 
 | Export | What it drives |
 | --- | --- |
-| `profile` | Name, role, location, email, hero bio, typed role list |
-| `socials` | GitHub / LinkedIn / Instagram links (footer + contact) |
+| `profile` | Name, title, tagline, availability, hero + About copy, interests, optional `avatar` photo |
+| `socials` | GitHub / LinkedIn / Instagram (add Telegram — commented example inside) |
 | `navLinks` | Header navigation |
-| `timeline` | Education + experience entries |
-| `projects`, `certificates`, `achievements` | Portfolio tab contents |
-| `techStack` | Tech Stack tab (set `learning: true` for the amber style) |
-| `stats` | Auto-derived counts — they recalculate from the arrays above |
-| `music` | Spotify link + section copy |
+| `experience` | Career timeline — company, title, period, responsibilities, contributions |
+| `education` | "The path so far" in About |
+| `projects` | Project gallery — role, features, tags, repo / live links, cover `pattern` |
+| `skills`, `learning` | Skill groups + the "currently learning" note |
+| `music` | Spotify link + interlude copy |
 | `contactConfig` | Contact form endpoint |
 | `footer` | Tagline + copyright |
 
-The project cards link to real GitHub repositories. Items marked
-`// ⚠️ PLACEHOLDER` in that file are remaining scaffolding for certificates and
-awards — replace them with your real credentials and recognitions. The stat
-counters read from those arrays, so the numbers stay honest as you edit.
+Fields marked `// ✏️ CONFIRM` were inferred from existing copy during the redesign.
+Optional fields left `null` or empty simply don't render.
 
-### Project thumbnails
+### Project covers & profile photo
 
-Cards draw a deterministic procedural graphic by default (no stock photos, no
-fake screenshots). To use a real image, add `image: '/shots/my-project.png'` to
-the item and drop the file in `public/`.
+Project cards draw a traditional Japanese pattern cover (seigaiha, hishi, shippo,
+kikko) — no stock photos, no fake screenshots. To use a real screenshot, add
+`image: '/shots/my-project.png'` and drop the file in `public/`.
+
+The hero shows a hand-drawn SVG desk scene until you set `profile.avatar`
+(e.g. `'/me.jpg'` in `public/`).
 
 ---
 
@@ -92,8 +93,7 @@ A ready-to-paste Supabase example is in the file's header comment.
 ### 3. Spotify
 
 `music.spotifyUrl` accepts any Spotify share link or URI (playlist, album or
-track) and is converted to an embed automatically. It currently points at a
-public lo-fi playlist as a placeholder — swap in your own.
+track) and is converted to an embed automatically.
 
 ---
 
@@ -102,41 +102,31 @@ public lo-fi playlist as a placeholder — swap in your own.
 ```
 src/
 ├── App.jsx                  page composition + preloader gate
-├── index.css                Tailwind v4 theme tokens, keyframes, utilities
+├── index.css                Tailwind v4 theme tokens (paper / sumi / sage / mist / shu), utilities
 ├── data/site.js             ← all content
-├── hooks/
-│   ├── useCountUp.js        viewport-triggered number animation
-│   ├── usePointer.js        normalised pointer coords (ref, no re-renders)
-│   ├── useScrollSpy.js      active nav section
-│   └── usePrefersReducedMotion.js
-├── lib/
-│   ├── commentStore.js      pluggable comment backend
-│   └── image.js             client-side avatar downscaling
+├── hooks/                   useScrollSpy, usePrefersReducedMotion
+├── lib/                     commentStore (dormant), image helpers
 └── components/
-    ├── Preloader.jsx        % counter driven by real load signals
-    ├── Navbar.jsx           sticky glassmorphism nav + mobile sheet
-    ├── Hero.jsx             headline, typewriter, CTAs, 3D mount
-    ├── About.jsx            bio + stats + timeline
-    ├── Timeline.jsx         scroll-linked vertical spine
-    ├── StatsRow.jsx         auto-counting stat cards
-    ├── MusicSection.jsx     stylised Spotify frame
-    ├── Portfolio.jsx        filter tabs + animated grid
-    ├── ProjectCard.jsx / CardThumb.jsx / DetailsModal.jsx
-    ├── Contact.jsx / ContactForm.jsx / Comments.jsx
-    ├── Footer.jsx
-    ├── three/               FloatingCore, ParticleField, HeroScene
-    └── ui/                  Button, Reveal, Section, Icons
+    ├── Preloader.jsx        short "opening the journal" loader
+    ├── Navbar.jsx           sticky paper nav + mobile sheet
+    ├── Hero.jsx             journal spread, taped photo, sticky note
+    ├── HeroIllustration.jsx hand-built SVG desk scene
+    ├── About.jsx            standfirst, index card, interests, education
+    ├── Skills.jsx           grouped skill cards
+    ├── Projects.jsx         editorial gallery + ProjectCard / CardThumb / DetailsModal
+    ├── MusicSection.jsx     Spotify interlude
+    ├── Experience.jsx       scroll-linked career timeline
+    ├── Contact.jsx          address card + letter-style ContactForm
+    ├── Footer.jsx           "The end" page
+    └── ui/                  Button, Reveal, Section (ChapterHeading, Hanko, Washi), Icons
 ```
 
 ---
 
 ## Performance & accessibility notes
 
-- `three` + `@react-three/drei` are **lazy-loaded** behind `React.lazy`, so the
-  hero text paints before the ~245 kB (gzipped) 3D chunk arrives.
-- WebGL is feature-detected; without it the hero falls back to a CSS gradient.
-- `prefers-reduced-motion` is honoured globally and inside the 3D scene
-  (distortion, float and auto-rotation all stop).
-- The canvas is `pointer-events: none` and `aria-hidden`, so it never traps focus.
-- Skip link, visible focus rings, `aria-live` on the loader and the realtime
-  badge, labelled form fields, Escape-to-close on the details modal.
+- No 3D runtime: the JS payload is ~140 kB gzipped in total (motion split into its own chunk).
+- `prefers-reduced-motion` stops petals, parallax, steam, chime and rotating notes.
+- Text colours meet WCAG AA on every paper tone.
+- Skip link, visible focus rings, labelled form fields with linked error text,
+  focus-trapped project dialog (Escape closes, focus returns to the card).

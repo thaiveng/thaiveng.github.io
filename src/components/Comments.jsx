@@ -6,10 +6,10 @@ import { Button } from './ui/Button.jsx';
 import { UploadIcon } from './ui/Icons.jsx';
 
 const STATUS = {
-  connecting: { label: 'Connecting', dot: 'bg-amber', text: 'text-amber', pulse: true },
-  live: { label: 'Realtime connected', dot: 'bg-emerald-400', text: 'text-emerald-400', pulse: true },
-  polling: { label: 'Connected', dot: 'bg-cyber', text: 'text-cyber', pulse: false },
-  offline: { label: 'Offline — queued locally', dot: 'bg-slate-muted', text: 'text-slate-muted', pulse: false },
+  connecting: { label: 'Connecting', dot: 'bg-shu', text: 'text-shu', pulse: true },
+  live: { label: 'Realtime connected', dot: 'bg-sage', text: 'text-sage', pulse: true },
+  polling: { label: 'Connected', dot: 'bg-mist', text: 'text-mist', pulse: false },
+  offline: { label: 'Offline — queued locally', dot: 'bg-ink-faint', text: 'text-ink-muted', pulse: false },
 };
 
 /** Coloured initial, used when a visitor doesn't upload a picture. */
@@ -24,7 +24,7 @@ function Avatar({ comment }) {
       <img
         src={comment.avatar}
         alt=""
-        className="size-10 shrink-0 rounded-full border border-hairline object-cover"
+        className="size-10 shrink-0 rounded-full border border-line object-cover"
       />
     );
   }
@@ -93,18 +93,18 @@ export default function Comments() {
   const remaining = 600 - body.length;
 
   return (
-    <div className="border border-hairline bg-ink-100/60 p-6 md:p-8">
+    <div className="border border-line bg-card p-6 md:p-8">
       {/* ---------- header + connection status ---------- */}
-      <div className="mb-7 flex flex-wrap items-start justify-between gap-4 border-b border-hairline pb-5">
+      <div className="mb-7 flex flex-wrap items-start justify-between gap-4 border-b border-line pb-5">
         <div>
-          <h3 className="font-display text-[1.15rem] font-semibold text-chalk">Live comment wall</h3>
-          <p className="mt-1 text-[0.86rem] text-ash">
+          <h3 className="font-display text-[1.15rem] font-semibold text-ink">Live comment wall</h3>
+          <p className="mt-1 text-[0.86rem] text-ink-soft">
             Leave a note. New comments appear instantly across your open tabs.
           </p>
         </div>
 
         <div
-          className="flex items-center gap-2.5 border border-hairline bg-ink-200/70 px-3 py-1.5"
+          className="flex items-center gap-2.5 border border-line bg-paper px-3 py-1.5"
           role="status"
           aria-live="polite"
         >
@@ -129,10 +129,10 @@ export default function Comments() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
             maxLength={40}
-            className="min-w-0 flex-1 border border-hairline bg-ink-200/60 px-3.5 py-2.5 text-[0.88rem] text-chalk placeholder:text-slate-muted focus:border-cyber/60 focus:outline-none"
+            className="min-w-0 flex-1 border border-line bg-paper px-3.5 py-2.5 text-[0.88rem] text-ink placeholder:text-ink-faint focus:border-mist/60 focus:outline-none"
           />
 
-          <label className="flex cursor-pointer items-center gap-2 border border-hairline bg-ink-200/60 px-3.5 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-ash transition-colors hover:border-cyber/40 hover:text-cyber">
+          <label className="flex cursor-pointer items-center gap-2 border border-line bg-paper px-3.5 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-ink-soft transition-colors hover:border-mist/40 hover:text-mist">
             <UploadIcon />
             {avatar ? 'Change' : 'Picture'}
             <input
@@ -149,7 +149,7 @@ export default function Comments() {
               <img
                 src={avatar}
                 alt="Your selected picture"
-                className="size-9 rounded-full border border-cyber/40 object-cover"
+                className="size-9 rounded-full border border-mist/40 object-cover"
               />
               <button
                 type="button"
@@ -157,7 +157,7 @@ export default function Comments() {
                   setAvatar(null);
                   if (fileInput.current) fileInput.current.value = '';
                 }}
-                className="font-mono text-[0.64rem] uppercase tracking-[0.12em] text-slate-muted hover:text-amber"
+                className="font-mono text-[0.64rem] uppercase tracking-[0.12em] text-ink-muted hover:text-shu"
               >
                 Remove
               </button>
@@ -165,7 +165,7 @@ export default function Comments() {
           )}
         </div>
 
-        {fileError && <p className="text-[0.78rem] text-amber">{fileError}</p>}
+        {fileError && <p className="text-[0.78rem] text-shu">{fileError}</p>}
 
         <div className="relative">
           <textarea
@@ -173,15 +173,15 @@ export default function Comments() {
             value={body}
             onChange={(e) => setBody(e.target.value.slice(0, 600))}
             placeholder="Say something nice (or useful)…"
-            className="w-full resize-y border border-hairline bg-ink-200/60 px-4 py-3 text-[0.9rem] text-chalk placeholder:text-slate-muted focus:border-cyber/60 focus:outline-none"
+            className="w-full resize-y border border-line bg-paper px-4 py-3 text-[0.9rem] text-ink placeholder:text-ink-faint focus:border-mist/60 focus:outline-none"
           />
-          <span className="pointer-events-none absolute bottom-3 right-3 font-mono text-[0.64rem] text-slate-muted">
+          <span className="pointer-events-none absolute bottom-3 right-3 font-mono text-[0.64rem] text-ink-muted">
             {remaining}
           </span>
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <p className="font-mono text-[0.64rem] text-slate-muted">
+          <p className="font-mono text-[0.64rem] text-ink-muted">
             Stored in your browser · swap the adapter in commentStore.js to go global
           </p>
           <Button type="submit" size="sm" disabled={body.trim().length < 2 || busy}>
@@ -201,24 +201,24 @@ export default function Comments() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 320, damping: 28 }}
-              className="flex gap-4 border border-hairline/70 bg-ink-200/40 p-4"
+              className="flex gap-4 border border-line bg-paper p-4"
             >
               <Avatar comment={comment} />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                  <span className="font-display text-[0.92rem] font-semibold text-chalk">
+                  <span className="font-display text-[0.92rem] font-semibold text-ink">
                     {comment.name}
                   </span>
-                  <span className="font-mono text-[0.64rem] text-slate-muted">
+                  <span className="font-mono text-[0.64rem] text-ink-muted">
                     {timeAgo(comment.createdAt)}
                   </span>
                   {comment.seed && (
-                    <span className="border border-hairline px-1.5 py-0.5 font-mono text-[0.58rem] uppercase tracking-[0.1em] text-slate-muted">
+                    <span className="border border-line px-1.5 py-0.5 font-mono text-[0.58rem] uppercase tracking-[0.1em] text-ink-muted">
                       sample
                     </span>
                   )}
                 </div>
-                <p className="mt-1.5 whitespace-pre-wrap break-words text-[0.9rem] leading-relaxed text-ash">
+                <p className="mt-1.5 whitespace-pre-wrap break-words text-[0.9rem] leading-relaxed text-ink-soft">
                   {comment.body}
                 </p>
               </div>
@@ -228,7 +228,7 @@ export default function Comments() {
       </ul>
 
       {comments.length === 0 && (
-        <p className="py-8 text-center text-[0.88rem] text-slate-muted">
+        <p className="py-8 text-center text-[0.88rem] text-ink-muted">
           No comments yet — be the first.
         </p>
       )}
