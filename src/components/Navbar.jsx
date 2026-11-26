@@ -5,7 +5,7 @@ import { useScrollSpy } from '../hooks/useScrollSpy.js';
 import { Button } from './ui/Button.jsx';
 import { CloseIcon, MenuIcon } from './ui/Icons.jsx';
 
-const sectionIds = ['home', 'about', 'skills', 'projects', 'music', 'experience', 'contact'];
+const sectionIds = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

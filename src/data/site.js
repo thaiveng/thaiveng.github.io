@@ -275,20 +275,6 @@ export const certificates = [];
 export const achievements = [];
 
 /* -------------------------------------------------------------------------- */
-/*  MUSIC                                                                     */
-/* -------------------------------------------------------------------------- */
-export const music = {
-  heading: 'A little music. A lot of ideas.',
-  blurb:
-    'The soundtrack behind most of the commits on this site. Low beats, no lyrics, nothing that competes with the thinking.',
-  /**
-   * Paste any Spotify share link or URI here — playlist, album or track.
-   */
-  spotifyUrl: 'https://open.spotify.com/playlist/43Gu1AiNvfL806vBr4p8bg?si=3e91cea298684238',
-  label: 'Daily Rotation',
-};
-
-/* -------------------------------------------------------------------------- */
 /*  CONTACT                                                                   */
 /* -------------------------------------------------------------------------- */
 export const contactConfig = {

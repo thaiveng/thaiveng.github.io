@@ -46,7 +46,6 @@ Almost everything you'll want to change lives in **one file**:
 | `education` | "The path so far" in About |
 | `projects` | Project gallery — role, features, tags, repo / live links, cover `pattern` |
 | `skills`, `learning` | Skill groups + the "currently learning" note |
-| `music` | Spotify link + interlude copy |
 | `contactConfig` | Contact form endpoint |
 | `footer` | Tagline + copyright |
 
@@ -90,11 +89,6 @@ To make them public, write an adapter with the same four methods
 (`load`, `add`, `subscribe`, `name`) and pass it to `createCommentStore()`.
 A ready-to-paste Supabase example is in the file's header comment.
 
-### 3. Spotify
-
-`music.spotifyUrl` accepts any Spotify share link or URI (playlist, album or
-track) and is converted to an embed automatically.
-
 ---
 
 ## Structure
@@ -114,7 +108,6 @@ src/
     ├── About.jsx            standfirst, index card, interests, education
     ├── Skills.jsx           grouped skill cards
     ├── Projects.jsx         editorial gallery + ProjectCard / CardThumb / DetailsModal
-    ├── MusicSection.jsx     Spotify interlude
     ├── Experience.jsx       scroll-linked career timeline
     ├── Contact.jsx          address card + letter-style ContactForm
     ├── Footer.jsx           "The end" page

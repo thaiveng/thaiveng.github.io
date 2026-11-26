@@ -109,14 +109,6 @@ export function UploadIcon({ className = 'size-4' }) {
   );
 }
 
-export function SpotifyIcon({ className = 'size-5' }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.56 14.42a.77.77 0 0 1-1.06.26c-2.9-1.77-6.55-2.17-10.86-1.19a.77.77 0 1 1-.34-1.5c4.7-1.07 8.75-.61 12 1.37.36.22.48.7.26 1.06Zm1.22-2.72a.96.96 0 0 1-1.32.32c-3.32-2.04-8.38-2.64-12.3-1.44a.96.96 0 1 1-.56-1.84c4.48-1.36 10.06-.7 13.87 1.64a.96.96 0 0 1 .31 1.32Zm.1-2.83C14.1 8.5 7.8 8.28 4.4 9.31a1.15 1.15 0 1 1-.67-2.2c3.9-1.19 10.86-.96 15.14 1.59a1.15 1.15 0 0 1-1.18 1.97l.19-.2Z" />
-    </svg>
-  );
-}
-
 /* ---------------------------- skill category ----------------------------- */
 export function PhoneIcon({ className = 'size-5' }) {
   return (
